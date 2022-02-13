@@ -1,4 +1,5 @@
 import '../../models/user_model.dart';
+import '../firestore/firestore_service.dart';
 import 'base_firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,6 +33,7 @@ class FirebaseAuthService implements IFirebaseAuthService {
       ));
       return 'Welcome ${model.name}';
     } on FirebaseAuthException catch (e) {
+      print(e.message);
       return e.message.toString();
     }
   }
@@ -83,6 +85,6 @@ class FirebaseAuthService implements IFirebaseAuthService {
   }
 
   Future<void> _insertUserInFirestore(UserModel model) async {
-    // await FirestoreService.instance?.insertUser(model); TODO:
+     await FirestoreService.instance?.insertUser(model); 
   }
 }

@@ -8,7 +8,6 @@ import 'core/init/navigation/navigation_route_manager.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const MyApp());
 }
 

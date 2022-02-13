@@ -52,7 +52,6 @@ class UserModel implements BaseModel {
         'email': email,
         'genre': genre,
         'name': name,
-        'password': password,
         'subjects': subjects,
         'totalViews': totalViews,
         'uid': uid,

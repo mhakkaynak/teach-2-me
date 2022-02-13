@@ -1,3 +1,4 @@
+import 'package:teach_2_me/products/models/chat_model.dart';
 import 'package:teach_2_me/products/models/lesson_model.dart';
 
 import '../../models/user_model.dart';
@@ -12,4 +13,6 @@ abstract class IFirestoreService {
   Future<void> addLesson(LessonModel lesson);
 
   Future<void> deleteLesson(LessonModel lesson);
+
+  Future<void> sendMessage(MessageModel message);
 }

@@ -8,6 +8,7 @@ class NeumorphicContainer extends Container {
     required Color shadowColor,
     double? height,
     double? width,
+    Widget? child,
   }) : super(
           key: key,
           height: height,
@@ -19,16 +20,17 @@ class NeumorphicContainer extends Container {
               BoxShadow(
                 color: shadowColor,
                 offset: const Offset(4, 4),
-                blurRadius: 16,
+                blurRadius: 8,
                 spreadRadius: 1,
               ),
               BoxShadow(
                 color: shadowColor,
                 offset: const Offset(-4, -4),
-                blurRadius: 16,
+                blurRadius: 8,
                 spreadRadius: 1,
               ),
             ],
           ),
+          child: child
         );
 }

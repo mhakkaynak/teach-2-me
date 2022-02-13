@@ -1,7 +1,6 @@
 import 'package:teach_2_me/core/base/model/base_model.dart';
 
 class LessonModel implements BaseModel {
-  // TODO: ihtiyaca gore model olustur.
   LessonModel._fromJson(o) {
     id = o['id'].toString();
     name = o['name'].toString();
@@ -9,6 +8,12 @@ class LessonModel implements BaseModel {
     views = double.tryParse(o['views'].toString());
     teacherId = o['teacherId'].toString();
   }
+
+  LessonModel({
+    this.name,
+    this.subject,
+  });
+
   LessonModel.addLesson({
     required this.name,
     required this.subject,

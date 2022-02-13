@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teach_2_me/products/firebase/firebase_auth/firebase_auth_service.dart';
+import 'package:teach_2_me/products/models/chat_model.dart';
 import 'package:teach_2_me/products/models/lesson_model.dart';
 
 import '../../models/user_model.dart';
@@ -14,16 +16,23 @@ class FirestoreService implements IFirestoreService {
   static FirestoreService? _instance;
 
   late final FirebaseFirestore _firestore;
-  late final CollectionReference _userCollectionReference;
   late final CollectionReference _lessonCollectionReference;
-
+  late final CollectionReference _userCollectionReference;
+  FirebaseFirestore get fireStore => _firestore;
   @override
   Future<void> addLesson(LessonModel lesson) async {
     try {
-      await _lessonCollectionReference.add(lesson.toMap()).then((value) {
+      await _lessonCollectionReference
+          .add(LessonModel.addLesson(
+              name: lesson.name,
+              subject: lesson.subject,
+              views: 0.0,
+              teacherId: FirebaseAuthService.instance?.uid).toMap())
+          .then((value) {
         _lessonCollectionReference.doc(value.id).update({'id': value.id});
       });
     } catch (e) {
+      print(e);
       // TODO: error
     }
   }
@@ -64,6 +73,17 @@ class FirestoreService implements IFirestoreService {
       await _userCollectionReference.doc(user.uid).set(user.toMap());
     } catch (e) {
       // TODO: toast message cikabilir.
+    }
+  }
+
+  @override
+  Future<void> sendMessage(MessageModel message) async {
+    try {
+      await _firestore
+          .collection('message' + message.lessonId.toString())
+          .add(message.toMap());
+    } catch (e) {
+      // TODO: error
     }
   }
 
